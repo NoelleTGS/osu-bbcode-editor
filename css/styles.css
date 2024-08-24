@@ -1,0 +1,132 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1c1719;
+    padding: 50px;
+}
+
+.container {
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+div:empty::before {
+    content: '... and it will update in real-time here!';
+    font-size: 14px;
+    color: grey;
+    font-family: monospace;
+}
+
+.editor-container {
+    display: flex;
+    gap: 20px;
+}
+
+#bbcode-input, #bbcode-preview {
+    width: 50%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #382e32;
+    overflow-y: auto;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+#bbcode-input {
+    font-family: monospace;
+    resize: vertical;
+}
+
+#bbcode-preview {
+    max-width: 1000px;
+    border: 1px solid #ddd;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    overflow-x: auto;
+    border-radius: 4px;
+}
+
+a {
+    color: #d9a6bd;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.spoiler {
+    background-color: #000;
+    color: #000;
+    cursor: pointer;
+}
+
+.spoiler:hover {
+    color: #fff;
+}
+
+blockquote {
+    border-left: 4px solid #ccc;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    font-style: italic;
+}
+
+.box {
+    color: #d9a6bd;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.box:hover {
+    text-decoration: underline;
+}
+
+.arrow {
+    margin-right: 5px;
+    display: inline-block;
+    color: white;
+    width: 20px;
+}
+
+.box-content {
+    padding-top: 10px;
+    display: none;
+}
+
+.notice {
+    background-color: #2a2226;
+    padding: 19px;
+    border-radius: 4px;
+    border: 2px solid #705c65;
+}
+
+footer {
+    color: #fff;
+    font-size: 12px;
+    padding-top: 20px;
+    display: block;
+    text-align: center;
+}
