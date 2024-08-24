@@ -84,6 +84,7 @@ function parseBBCode(text) {
     // Audio
 
     // Heading (v1)
+    parsedText = parsedText.replace(/\[heading](.*?)\[\/heading]/gis, '<span style="color:#e0b8ca;"><h2>$1</h2></span>');
 
     // Notice
     parsedText = parsedText.replace(/\[notice](.*?)\[\/notice]/gis, '<div class="notice">$1</div>');
