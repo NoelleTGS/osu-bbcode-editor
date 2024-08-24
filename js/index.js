@@ -124,16 +124,12 @@ function parseBoxes(text) {
 
     }
 
-    //text = text.replace(/(<\/div>\s*)<br>/g, '</div>');
-
     return text;
 }
 
 function createBox(name, content){
-    console.log(content)
     content = content.replace(/^<br>/,"");
     content = content.replace(/<br>$/,"");
-    console.log(content)
     const boxId = 'box-' + Math.random().toString(36).substring(2, 9);
     return `
         <div class="box" onclick="toggleBox('${boxId}', this)">
