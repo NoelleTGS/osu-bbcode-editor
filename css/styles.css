@@ -22,13 +22,6 @@ h1 {
     color: #ffffff;
 }
 
-div:empty::before {
-    content: '... and it will update in real-time here!';
-    font-size: 14px;
-    color: grey;
-    font-family: monospace;
-}
-
 .editor-container {
     display: flex;
     gap: 20px;
@@ -53,6 +46,13 @@ div:empty::before {
 #bbcode-preview {
     max-width: 1000px;
     border: 1px solid #ddd;
+}
+
+#bbcode-preview:empty::before {
+    content: '... and it will update in real-time here!';
+    font-size: 14px;
+    color: grey;
+    font-family: monospace;
 }
 
 pre {

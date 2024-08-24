@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const bbcodeInput = document.getElementById('bbcode-input');
     const bbcodePreview = document.getElementById('bbcode-preview');
+    const errorMessageElement = document.getElementById('error-message');
     bbcodePreview.innerHTML = parseBBCode(bbcodeInput.value);
 
     bbcodeInput.addEventListener('input', () => {
+        errorMessageElement.textContent = "";
         bbcodePreview.innerHTML = parseBBCode(bbcodeInput.value);
     });
 });
@@ -93,6 +95,11 @@ function parseBBCode(text) {
     return parsedText;
 }
 
+function errorMessage(message) {
+    const errorMessageElement = document.getElementById('error-message');
+    errorMessageElement.textContent = message;
+}
+
 function parseBoxes(text) {
     const boxOpenRegex = /\[box=(.*?)]([\s\S]*)/i;
     const boxCloseRegex = /([\s\S]*?)\[\/box]/i;
@@ -104,14 +111,17 @@ function parseBoxes(text) {
         matchNew = boxCloseRegex.exec(match[2]);
 
         const boxName = match[1];
-        const boxContent = matchNew[1];
+        try {
+            const boxContent = matchNew[1];
+            textNew += createBox(boxName, boxContent);
+            textNew += text.substring(match.index + 6 + boxName.length + matchNew[0].length);
 
-        // console.log("Found box with name: " + boxName + " and content: " + boxContent);
+            text = textNew;
+        } catch ({ name, message }) {
+            errorMessage("An error occurred while parsing boxes. Please make sure all your boxes are terminated with a [/box] tag.");
+            return text;
+        }
 
-        textNew += createBox(boxName, boxContent);
-        textNew += text.substring(match.index + 6 + boxName.length + matchNew[0].length);
-
-        text = textNew;
     }
 
     //text = text.replace(/(<\/div>\s*)<br>/g, '</div>');
