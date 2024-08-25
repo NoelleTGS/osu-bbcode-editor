@@ -130,27 +130,34 @@ function parseBoxes(text) {
 function createBox(name, content){
     content = content.replace(/^<br>/,"");
     content = content.replace(/<br>$/,"");
-    const boxId = 'box-' + Math.random().toString(36).substring(2, 9);
+    const boxId = 'box-' + name.substring(0, 9);
+    const isOpen = boxStates[boxId] === 'open';
     return `
         <div class="box" onclick="toggleBox('${boxId}', this)">
             <i class="fa-solid fa-angle-right arrow"></i><strong>${name}</strong>
         </div>
-        <div class="box-content" id="${boxId}" style="display: none;">
+        <div class="box-content" id="${boxId}" style="display: ${isOpen ? 'block' : 'none'};">
             ${content}
         </div>
     `;
 }
 
+const boxStates = {};
+
 function toggleBox(boxId, element) {
     const boxContent = document.getElementById(boxId);
     const icon = element.querySelector('.arrow');
-    if (boxContent.style.display === "none" || boxContent.style.display === "") {
+    const isOpen = boxContent.style.display === "block";
+
+    if (!isOpen) {
         boxContent.style.display = "block";
         icon.classList.remove('fa-angle-right');
         icon.classList.add('fa-angle-down');
+        boxStates[boxId] = 'open';
     } else {
         boxContent.style.display = "none";
         icon.classList.remove('fa-angle-down');
         icon.classList.add('fa-angle-right');
+        boxStates[boxId] = 'closed';
     }
 }
