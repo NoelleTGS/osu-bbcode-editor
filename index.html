@@ -12,6 +12,36 @@
 <div class="container">
     <h1>osu! BBCode Editor</h1>
     <div id="error-message" style="color: red; font-weight: bold; text-align: center; padding-bottom: 20px;"></div>
+    <div class="toolbar">
+        <button data-tag="b"><strong><i class="fa-solid fa-bold"></i></strong></button>
+        <button data-tag="i"><em><i class="fa-solid fa-italic"></i></em></button>
+        <button data-tag="u"><u><i class="fa-solid fa-underline"></i></u></button>
+        <button data-tag="s"><s><i class="fa-solid fa-strikethrough"></i></s></button>
+        <button data-tag="color="><i class="fa-solid fa-palette"></i></button>
+        <button data-tag="box="><i class="fa-solid fa-barcode"></i></button>
+        <!--        <button data-tag="quote="><i class="fa-solid fa-comment"></i></button>-->
+        <!--        <button data-tag="code"><i class="fa-solid fa-code"></i></button>-->
+        <button data-tag="centre"><i class="fa-solid fa-align-center"></i></button>
+        <button data-tag="url="><i class="fa-solid fa-link"></i></button>
+        <button data-tag="profile="><i class="fa-solid fa-user"></i></button>
+        <!--        <button data-tag="numbered-list"><i class="fa-solid fa-list-ol"></i></button>-->
+        <!--        <button data-tag="list"><i class="fa-solid fa-list"></i></button>-->
+        <button data-tag="img="><i class="fa-solid fa-image"></i></button>
+        <button data-tag="heading"><i class="fa-solid fa-heading"></i></button>
+        <button data-tag="notice"><i class="fa-solid fa-circle-exclamation"></i></button>
+        <br>
+        <label class="size-select" data-orig-title="Font Size">
+            <span>Font Size</span>
+            <i class="fa-solid fa-chevron-down"></i>
+            <select id="size-select-select" onchange="changeFontSize()">
+                <option hidden>Hidden option</option>
+                <option value="50">Tiny</option>
+                <option value="85">Small</option>
+                <option value="100">Normal</option>
+                <option value="150">Large</option>
+            </select>
+        </label>
+    </div>
     <div class="editor-container">
         <textarea id="bbcode-input" placeholder="Enter BBCode here..."></textarea>
         <div id="bbcode-preview"></div>
