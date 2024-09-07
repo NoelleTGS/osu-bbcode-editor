@@ -61,6 +61,7 @@ function parseBBCode(text) {
 
     // Newlines
     parsedText = parsedText.replace(/\n/g, '<br>');
+    parsedText = parsedText.replace(/\[\/heading]<br>/g, '[/heading]');
 
     // Bold
     parsedText = parsedText.replace(/\[b](.*?)\[\/b]/gis, '<strong>$1</strong>');
