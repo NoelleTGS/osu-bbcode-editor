@@ -2,12 +2,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const bbcodeInput = document.getElementById('bbcode-input');
     const bbcodePreview = document.getElementById('bbcode-preview');
     const errorMessageElement = document.getElementById('error-message');
+    const toolbarButtons = document.querySelectorAll('.toolbar button');
     bbcodePreview.innerHTML = parseBBCode(bbcodeInput.value);
 
     bbcodeInput.addEventListener('input', () => {
         errorMessageElement.textContent = "";
         bbcodePreview.innerHTML = parseBBCode(bbcodeInput.value);
     });
+
+    toolbarButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tag = button.getAttribute('data-tag');
+            insertTag(tag);
+        });
+    });
+
+    window.changeFontSize = function() {
+    const selectElement = document.getElementById('size-select-select');
+    const selectedValue = selectElement.value;
+
+        if (selectedValue) {
+            insertTag("size=" + selectedValue);
+            // Reset the dropdown to the hidden option
+            selectElement.selectedIndex = 0;
+        }
+    }
+
+    function insertTag(tag) {
+        console.log(tag);
+        const startTag = `[${tag}]`;
+        let strippedTag = tag.replace(/[^\a-zA-Z]/g, '');
+        const endTag = `[/${strippedTag}]`;
+        const { selectionStart, selectionEnd, value } = bbcodeInput;
+        const selectedText = value.substring(selectionStart, selectionEnd);
+
+        // Set caret position to directly after = sign if there is one, set to inside the tags otherwise
+        let caretPosition;
+        if (tag.length === strippedTag.length + 1) {
+            caretPosition = selectionStart + startTag.length - 1;
+        } else {
+            caretPosition = selectionStart + startTag.length;
+        }
+        const newText = startTag + selectedText + endTag;
+
+        bbcodeInput.setRangeText(newText, selectionStart, selectionEnd, 'end');
+        bbcodeInput.focus();
+        bbcodeInput.setSelectionRange(caretPosition, caretPosition);
+    }
 });
 
 /**
