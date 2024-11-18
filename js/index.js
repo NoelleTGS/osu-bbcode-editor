@@ -176,7 +176,7 @@ function createBox(name, content){
     const isOpen = boxStates[boxId] === 'open';
     return `
         <div class="box" onclick="toggleBox('${boxId}', this)">
-            <i class="fa-solid fa-angle-right arrow"></i><strong>${name}</strong>
+            <i class="fa-solid ${isOpen ? 'fa-angle-down' : 'fa-angle-right'} arrow"></i><strong>${name}</strong>
         </div>
         <div class="box-content" id="${boxId}" style="display: ${isOpen ? 'block' : 'none'};">
             ${content}
