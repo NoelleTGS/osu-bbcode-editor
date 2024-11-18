@@ -150,12 +150,12 @@ function parseBoxes(text) {
     let match, matchNew, textNew;
 
     while (match = boxOpenRegex.exec(text)) {
+        const boxName = match[1];
         !boxCounters[boxName] ? boxCounters[boxName] = 1 : boxCounters[boxName] += 1
         textNew = text.substring(0, match.index);
 
         matchNew = boxCloseRegex.exec(match[2]);
 
-        const boxName = match[1];
         try {
             const boxContent = matchNew[1];
             textNew += createBox(boxName, boxContent);
