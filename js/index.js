@@ -142,21 +142,22 @@ function errorMessage(message) {
     errorMessageElement.textContent = message;
 }
 
+let boxCounters = {}
+
 function parseBoxes(text) {
     const boxOpenRegex = /\[box=(.*?)]([\s\S]*)/i;
     const boxCloseRegex = /([\s\S]*?)\[\/box]/i;
     let match, matchNew, textNew;
-    let boxCounter = 0
     while (match = boxOpenRegex.exec(text)) {
-        boxCounter++
         textNew = text.substring(0, match.index);
 
         matchNew = boxCloseRegex.exec(match[2]);
 
         const boxName = match[1];
+        !boxCounters[boxName] ? boxCounters[boxName] = 1 : boxCounters[boxName] += 1
         try {
             const boxContent = matchNew[1];
-            textNew += createBox(boxName, boxContent, boxCounter);
+            textNew += createBox(boxName, boxContent);
             textNew += text.substring(match.index + 6 + boxName.length + matchNew[0].length);
 
             text = textNew;
@@ -166,14 +167,14 @@ function parseBoxes(text) {
         }
 
     }
-
+    boxCounters = {}
     return text;
 }
 
-function createBox(name, content, boxCounter){
+function createBox(name, content) {
     content = content.replace(/^<br>/,"");
     content = content.replace(/<br>$/,"");
-    const boxId = `box-${name.substring(0, 9)}${boxCounter}`
+    const boxId = `box-${name.substring(0, 9)}-${boxCounters[name]}`;
     const isOpen = boxStates[boxId] === 'open';
     return `
         <div class="box" onclick="toggleBox('${boxId}', this)">
