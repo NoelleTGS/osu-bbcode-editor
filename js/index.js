@@ -93,7 +93,7 @@ function parseBBCode(text) {
 
     // Quote
     parsedText = parsedText.replace(/\[quote](.*?)\[\/quote]/gis, '<blockquote>$1</blockquote>');
-    parsedText = parsedText.replace(/\[quote=(.*?)](.*?)\[\/quote]/gis, '<blockquote><strong>$1 said:</strong><br>$2</blockquote>');
+    parsedText = parsedText.replace(/\[quote=(.*?)](.*?)\[\/quote]/gis, '<blockquote><strong>$1 wrote:</strong><br>$2</blockquote>');
 
     // Inline code
     parsedText = parsedText.replace(/\[code](.*?)\[\/code]/gis, '<pre>$1</pre>');
